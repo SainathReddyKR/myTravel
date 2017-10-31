@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Vehicle Attachments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Passengerride</th>
+      <th>Avatar</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @vehicle_attachments.each do |vehicle_attachment| %>
+      <tr>
+        <td><%= vehicle_attachment.passengerride_id %></td>
+        <td><%= vehicle_attachment.avatar %></td>
+        <td><%= link_to 'Show', vehicle_attachment %></td>
+        <td><%= link_to 'Edit', edit_vehicle_attachment_path(vehicle_attachment) %></td>
+        <td><%= link_to 'Destroy', vehicle_attachment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Vehicle Attachment', new_vehicle_attachment_path %>

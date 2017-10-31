@@ -1,0 +1,2 @@
+module VehicleAttachmentsHelper
+end

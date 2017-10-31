@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Passengerride:</strong>
+  <%= @vehicle_attachment.passengerride_id %>
+</p>
+
+<p>
+  <strong>Avatar:</strong>
+  <%= @vehicle_attachment.avatar %>
+</p>
+
+<%= link_to 'Edit', edit_vehicle_attachment_path(@vehicle_attachment) %> |
+<%= link_to 'Back', vehicle_attachments_path %>

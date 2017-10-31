@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  passengerride_id: 1
+  avatar: MyString
+
+two:
+  passengerride_id: 1
+  avatar: MyString

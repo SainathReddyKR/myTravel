@@ -1,0 +1,256 @@
+<%= render 'shared/error', obj: @driverride %>
+
+
+
+
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
+
+<div class="bootstrap-iso">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-horizontal">
+          <%= form_for @driverride do |f| %>
+
+              <%= f.fields_for :post_attachments do |p| %>
+                  <div class="field">
+                    <%= p.label :avatar %><br>
+                    <%= p.file_field :avatar, :multiple => true, name: "post_attachments[avatar][]" %>
+                  </div>
+              <% end %>
+
+              <div class="form-group ">
+                <div class="control-label col-sm-2 requiredField">
+                  <%= f.label :name, 'Name of the Condo:' %>
+                  <span class="asteriskField">*</span>
+                </div>
+                <div class="col-sm-8">
+                  <%= f.text_field :name, class: "select form-control", placeholder: "Eg: The Bloom" %>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="form-group ">
+                <div class="control-label col-sm-2 requiredField">
+                  <%= f.label :rent, 'Rent (bahts / month):' %>
+                  <span class="asteriskField">*</span>
+                </div>
+                <div class="col-sm-8">
+                  <%= f.number_field :rent, min: '1', class: "select form-control", placeholder: "Eg: 12000" %>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="form-group ">
+                <div class="control-label col-sm-2 requiredField">
+                  <%= f.label :address, 'Address:' %>
+                  <span class="asteriskField">*</span>
+                </div>
+                <div class="col-sm-8">
+                  <%= f.text_field :address, class: "select form-control", placeholder: "Eg: 58 Moo 9, Km. 42, Paholyothin Highway, Khlong Nung, Pathum Thani 12120" %>
+                </div>
+              </div>
+              <br>
+
+              <div class="form-group ">
+                <div class="control-label col-sm-2 requiredField">
+                  <%= f.label :contract, 'Contract (months):' %>
+                  <span class="asteriskField">*</span>
+
+                </div>
+                <div class="col-sm-8">
+                  <%= f.number_field :contract, min: '1', class: "select form-control", placeholder: "Eg: 6" %>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="form-group ">
+                <div class="control-label col-sm-2 requiredField">
+                  <%= f.label :area, 'Area (sqm):' %>
+                </div>
+                <div class="col-sm-8">
+                  <%= f.number_field :area, min: '1', class: "select form-control", placeholder: "Eg: 28" %>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="form-group ">
+                <div class="control-label col-sm-2 requiredField">
+                  <%= f.label :bedroom, 'Number of Bedrooms:' %>
+                  <span class="asteriskField">*</span>
+                </div>
+                <div class="col-sm-8">
+                  <%= f.number_field :bedroom, min: '1', class: "select form-control", placeholder: "Eg: 3" %>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="form-group ">
+                <div class="control-label col-sm-2 requiredField">
+                  <%= f.label :bathroom, 'Number of Bathrooms:' %> <span class="asteriskField">*</span>
+                </div>
+                <div class="col-sm-8">
+                  <%= f.number_field :bathroom, min: '1', class: "select form-control", placeholder: "Eg: 2" %>
+                </div>
+              </div>
+
+              <br>
+
+              <div class="form-group ">
+                <div class="control-label col-sm-2 requiredField">
+                  <%= f.label :kitchen, 'Number of Kitchens:' %>
+                  <span class="asteriskField">*</span>
+                </div>
+                <div class="col-sm-8">
+                  <%= f.number_field :kitchen, min: '1', class: "select form-control", placeholder: "Eg: 1" %>
+                </div>
+              </div>
+
+              <div class="form-group ">
+                <div class="control-label">
+                </div>
+                <div class="control-label col-sm-2 requiredField">
+                  <p><b>Please select the services in your Condo</b></p>
+                </div>
+
+                <div class="col-sm-8">
+                  <div class=" ">
+                    <div class="checkbox">
+                      <label class="checkbox"><%= f.check_box :swimmingpool %>Swimming Pool</label>
+                    </div>
+                    <div class="checkbox">
+
+                      <label class="checkbox"><%= f.check_box :elevator %>Elevator</label>
+
+                    </div>
+                    <div class="checkbox">
+
+                      <label class="checkbox"><%= f.check_box :parking %>Parking</label>
+
+                    </div>
+
+
+                    <div class="checkbox">
+
+                      <label class="checkbox"><%= f.check_box :security %>24x7 Security</label>
+
+                    </div>
+
+                    <div class="checkbox">
+
+                      <label class="checkbox"><%= f.check_box :balcony %>Balcony</label>
+
+                    </div>
+
+                    <div class="checkbox">
+
+                      <label class="checkbox"><%= f.check_box :gym %>Gym</label>
+
+                    </div>
+                    <div class="checkbox">
+
+                    <label class="checkbox"><%= f.check_box :kids %>Kids Playground</label>
+
+                  </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group ">
+                <div class="control-label">
+                </div>
+                <div class="control-label col-sm-2 requiredField">
+                  <p><b>Please select nearby supermarkets</b></p>
+                </div>
+
+                <div class="col-sm-8">
+                  <div class=" ">
+                    <div class="checkbox">
+                      <label class="checkbox"><%= f.check_box :eleven %>7-eleven</label>
+                    </div>
+                    <div class="checkbox">
+
+                      <label class="checkbox"><%= f.check_box :bigc %>Big C</label>
+
+                    </div>
+                    <div class="checkbox">
+
+                      <label class="checkbox"><%= f.check_box :familymart %>Family Mart</label>
+
+                    </div>
+
+
+                    <div class="checkbox">
+
+                      <label class="checkbox"><%= f.check_box :tesco %>Tesco Lotus</label>
+
+                    </div>
+
+                    <div class="checkbox">
+
+                      <label class="checkbox"><%= f.check_box :tops %>Tops Market</label>
+
+                    </div>
+
+                    <div class="checkbox">
+
+                      <label class="checkbox"><%= f.check_box :lawson %>Lawson 108</label>
+
+                    </div>
+                    <div class="checkbox">
+
+                      <label class="checkbox"><%= f.check_box :makro %>Makro</label>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!--                                     DESCRIPTION                                                                 -->
+
+
+              <div class="form-group ">
+                <div class="control-label col-sm-2 ">
+                  <%= f.label :additionalinfo, 'Additional Info:' %>
+                </div>
+                <div class="col-sm-8">
+                  <%= f.text_area :additionalinfo, class: "form-control"%>
+                </div>
+              </div>
+
+
+              <!--                                     Submit                                                                 -->
+              <br>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-8">
+                  <div>
+                    <%= f.submit 'Post Ad', class: 'btn btn-primary' %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-8">
+                  <%= link_to 'Cancel', driverrides_path, class: 'btn btn-danger' %>
+                </div></div>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>

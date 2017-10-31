@@ -1,0 +1,324 @@
+<%= render 'shared/error', obj: @passengerride %>
+
+
+
+<script src="https://maps.googleapis.com/maps/api/place/autocomplete/json?&types=address&country=fr&key==AIzaSyCtRcoyzyX2Lv4rspUxVChuqFp7SS5QHxc&libraries=places"></script>
+
+<script type="text/javascript">
+  google.maps.event.addDomListener(window, 'load', intilize);
+  function intilize() {
+
+    var options = {
+      componentRestrictions: {country: "us"}
+    };
+
+    var autocomplete = new google.maps.places.Autocomplete(document.getElementById("txtautocomplete"));
+
+
+    google.maps.event.addListener(autocomplete, 'place_changed', function () {
+
+      var place = autocomplete.getPlace();
+    });
+
+  };
+
+</script>
+
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+    $('#passengerride_vehicle').on('change', function() {
+      if ( this.value == 'Car' || this.value == 'Bus' || this.value == 'Mini Van')
+      {
+        $("#appear_not_bike").show();
+      }
+      else if ( this.value == 'Bike')
+      {
+        $("#appear_not_bike").hide();
+      }
+      else
+      {
+        $("#appear_not_bike").show();
+      }
+    });
+  });
+
+  $(document).ready(function(){
+    $('#passengerride_music').on('change', function() {
+      if ( this.checked)
+      {
+        $("#appear_music").show();
+      }
+      else
+      {
+        $("#appear_music").hide();
+      }
+    });
+  });
+
+  $('#tooltip').tooltip()
+
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
+
+<div class="bootstrap-iso">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-horizontal">
+          <%= form_for @passengerride do |f| %>
+
+              <!--                                    VEHICLE                                           -->
+
+              <%= f.fields_for :vehicle_attachments do |p| %>
+                  <div class="field">
+                    <%= p.label :avatar %><br>
+                    <%= p.file_field :avatar, :multiple => true, name: "vehicle_attachments[avatar][]" %>
+                  </div>
+              <% end %>
+
+              <!--                                    VEHICLE                                           -->
+              <div class="form-group ">
+                <div class="control-label col-sm-2 requiredField">
+                  <%= f.label :vehicle, 'Select type of Vehicle:' %>
+                  <span class="asteriskField">*</span>
+                </div>
+                <div class="col-sm-8">
+                  <%= f.select(:vehicle, Passengerride::VEHICLE_LIST, {}, {class: "select form-control"}) %>
+                </div>
+              </div>
+
+              <!--                                     MODEL                                               -->
+              <div class="form-group ">
+                <div class="control-label col-sm-2 requiredField">
+                  <%= f.label :model, 'Model:' %>
+                  <span class="asteriskField">*</span>
+                </div>
+                <div class="col-sm-8">
+                  <%= f.text_field :model, class: "select form-control", placeholder: "Eg: Mitsubishi Pajero" %>
+                </div>
+              </div>
+
+              <div class="form-group ">
+                <div class="control-label col-sm-2 requiredField">
+                  <%= f.label :fuel, 'Select fuel type:' %>
+                  <span class="asteriskField">*</span>
+                </div>
+                <div class="col-sm-8">
+                  <%= f.select(:fuel, Passengerride::FUEL_LIST, {}, {class: "select form-control"}) %>
+                </div>
+              </div>
+
+              <!--                                     RENT                                                 -->
+
+              <div class="form-group ">
+                <div class="control-label col-sm-2 requiredField">
+                    <%= f.label :rent, 'Please enter the rent:' %>
+                  <span class="asteriskField">*</span>
+                </div>
+                <div class="col-sm-8">
+                  <%= f.number_field :rent, min: '1', class: "select form-control", placeholder: "Eg: 1200" %>
+                </div>
+              </div>
+
+              <!--                                     SEATS                                             -->
+              <div class="form-group ">
+                <div class="control-label col-sm-2 requiredField">
+                  <%= f.label :seats, 'Number of seats:' %>
+                  <span class="asteriskField">*</span>
+                </div>
+                <div class="col-sm-8">
+                  <%= f.number_field :seats, min: '1', class: "select form-control", placeholder: "Eg: 5" %>
+                </div>
+              </div>
+
+              <!--                                     PICKUP                                   -->
+              <div class="form-group ">
+                <div class="control-label col-sm-2 requiredField">
+                  <%= f.label :pickup, 'Enter pickup location:' %>
+                </div>
+                <div class="col-sm-8">
+                  <%= f.text_field :pickup, class: "select form-control", placeholder: "Enter the Pickup Address here.", id: 'txtautocomplete' %>
+                </div>
+              </div>
+
+              <div class="form-group ">
+                <div class="control-label col-sm-2 requiredField">
+                  <%= f.label :userlocation, 'Do you deliver the vehicle to User preferred location?' %>
+                </div>
+                <div class="col-sm-8">
+                  <div class="checkbox">
+                    <label class="checkbox"><%= f.check_box :userlocation %>Yes</label>
+                  </div>
+                </div>
+              </div>
+
+              <!--                                     MILEAGE                                             -->
+              <div class="form-group ">
+                <div class="control-label col-sm-2 requiredField">
+                  <%= f.label :mileage, 'Mileage:' %>
+                </div>
+                <div class="col-sm-8">
+                  <%= f.number_field :mileage, min: '1', class: "select form-control", placeholder: "Eg: 32" %>
+                </div>
+              </div>
+
+
+              <!--                                       APPEAR                                              -->
+
+              <div id="appear_not_bike" style="display: block">
+
+                <!--                                       AC                                              -->
+
+                <div class="form-group ">
+                  <div class="control-label">
+                  </div>
+                  <div class="control-label col-sm-2 requiredField">
+                    <p><b>Please select the features of your Vehicle</b></p>
+                  </div>
+
+                  <div class="col-sm-8">
+                    <div class=" ">
+                      <div class="checkbox">
+                        <label class="checkbox"><%= f.check_box :ac %>Air Conditioner</label>
+                      </div>
+                      <div class="checkbox">
+
+                        <label class="checkbox"><%= f.check_box :tv %>Television</label>
+
+                      </div>
+                      <div class="checkbox">
+
+                        <label class="checkbox"><%= f.check_box :music %>Music System</label>
+
+                      </div>
+
+                      <div id="appear_music" style="display: none">
+
+                        <div class="checkbox">
+
+                          <label class="checkbox"><%= f.check_box :auxcable %>AUX Cable</label>
+
+                        </div>
+                        <div class="checkbox">
+
+                          <label class="checkbox"><%= f.check_box :bluetooth %>Bluetooth</label>
+
+                        </div>
+
+                      </div>
+
+                      <div class="checkbox">
+
+                        <label class="checkbox"><%= f.check_box :navigation %>Navigation System</label>
+
+                      </div>
+                      <div class="checkbox">
+
+                        <label class="checkbox"><%= f.check_box :rearbackupcamera %>Rear Backup Camera</label>
+
+                      </div>
+                    </div>
+                  </div>
+
+
+
+                </div>
+
+
+
+
+                <!--                                       PETS                                              -->
+
+                <div class="form-group ">
+                  <div class="control-label">
+                  </div>
+                  <div class="control-label col-sm-2 requiredField">
+                    <p><b>Please select what the customers are restricted from:</b></p>
+                  </div>
+
+                  <div class="col-sm-8">
+                    <div class=" ">
+                      <div class="checkbox">
+
+                        <label class="checkbox"><%= f.check_box :pets %>Pets</label>
+
+                      </div>
+                      <div class="checkbox">
+
+                        <label class="checkbox"><%= f.check_box :drinking %>Consuming Alcohol inside the vehicle</label>
+
+                      </div>
+                      <div class="checkbox">
+
+                        <label class="checkbox"><%= f.check_box :eating %>Consuming Food inside the vehicle</label>
+
+                      </div>
+                      <div class="checkbox">
+
+                        <label class="checkbox"><%= f.check_box :smoking %>Smoking inside the vehicle</label>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+
+              </div>
+
+              <!--                                     DESCRIPTION                                                                 -->
+
+
+              <div class="form-group ">
+                <div class="control-label col-sm-2 ">
+                  <%= f.label :additionalinfo, 'Additional Info:' %>
+                </div>
+                <div class="col-sm-8">
+                  <%= f.text_area :additionalinfo, class: "form-control"%>
+                </div>
+              </div>
+
+
+              <!--                                     Submit                                                                 -->
+              <br>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-8">
+                  <div>
+                    <%= f.submit 'Post Ad', class: 'btn btn-primary' %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-8">
+                  <%= link_to 'Cancel', passengerrides_path, class: 'btn btn-danger' %>
+                </div></div>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+  });
+</script>

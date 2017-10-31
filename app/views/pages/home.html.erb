@@ -1,0 +1,30 @@
+<div class="center jumbotron">
+  <h1>Welcome to My Travel!</h1>
+  <br>
+  <p> A market place for Foreigner. Rent vehicle and Condo!</p>
+
+  <% if user_signed_in? %>
+
+  <% else %>
+      <p>Didn't sign up yet?</p>
+      <%= link_to "Sign up", new_user_registration_path , class: "btn btn-primary btn-s" %> | <%= link_to "Login", new_user_session_path, class: "btn btn-primary btn-s" %>
+  <% end %>
+</div>
+
+<% if user_signed_in? %>
+<div class="center jumbotron">
+    <p>New to the city? Need to rent a condo?</p>
+  <%= link_to "Rent a Condo", driverrides_path, class: "btn btn-primary btn" %>
+  <br><br>
+  <p>Leaving your city for a few months? Rent your condo and save money!</p><%= link_to "Post Ad to Rent Condo", new_driverride_path, class: "btn btn-primary btn" %>
+
+</div>
+
+    <div class="center jumbotron">
+      <p>Don't have a car? Is taxi too expensive? Need to rent a Vehicle?</p>
+      <%= link_to "Rent a Vehicle", passengerrides_path, class: "btn btn-primary btn" %>
+      <br><br>
+      <p>Have an old MotorBike lying around? Or want to start your own renting service?</p><%= link_to "Post Ad to Rent Vehicle", new_passengerride_path, class: "btn btn-primary btn" %>
+
+    </div>
+<% end %>
